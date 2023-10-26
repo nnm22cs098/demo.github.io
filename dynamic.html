@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Patient Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       body {
+            background-image: url("b.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        table {
+            width: 50%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Patient Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr>
+                <td><input type="text" name="patient_name[]"></td>
+                <td><input type="email" name="patient_email[]"></td>
+                <td>
+                    <select name="patient_gender[]">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+                <td><input type="text" name="patient_phone[]"></td>
+                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="addRow()">Add Patient</button>
+    <script>
+        function addRow() {
+            const tableBody = document.getElementById("table-body");
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="text" name="patient_name[]"></td>
+                <td><input type="email" name="patient_email[]"></td>
+                <td>
+                    <select name="patient_gender[]">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+                <td><input type="text" name="patient_phone[]"></td>
+                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+            `;
+            tableBody.appendChild(newRow);
+        }
+    
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            const tableBody = document.getElementById("table-body");
+            tableBody.removeChild(row);
+        }
+    </script>
+</body>
+</html>
